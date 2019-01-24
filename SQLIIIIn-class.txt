@@ -1,0 +1,87 @@
+SELECT prod_id, prod_name --just want product name to start with fish and has anything else afterwards
+FROM Products
+WHERE prod_name LIKE 'Fish%';
+
+ SELECT prod_id, prod_name --just want product name to contain bean bag within it with anything else before or after it
+ FROM Products
+ WHERE prod_name LIKE '%bean bag%';
+
+ SELECT cust_name, cust_email --realistic application, searching for email addresses
+ FROM Customers
+ WHERE cust_email LIKE 's%@villagetoys.com';
+
+ SELECT prod_id, prod_name --return exactly 3 characters before the product ending in 'inch teddy bear'. saying '%inch...' would match all characters before
+ FROM Products
+ WHERE prod_name LIKE '___inch teddy bear';
+
+ SELECT cust_contact --the name will begin with either a J or an M, return all of these results
+ FROM Customers
+ WHERE cust_contact LIKE '[JM]%';
+
+ SELECT cust_contact --get all contact names that don't start with J or M, and all letters after
+ FROM Customers
+ WHERE cust_contact LIKE '[^JM]%';
+
+ SELECT cust_contact --SAME AS^
+ FROM Customers
+ WHERE NOT cust_contact LIKE '[JM]%';
+
+ --practice
+
+ SELECT vend_name --show all vendor names that start with B and end with s from vendors table
+ FROM Vendors
+ WHERE vend_name LIKE 'B%s';
+
+ SELECT prod_name --show all product names that have the second letter as i, from products table
+ FROM Products
+ WHERE prod_name LIKE '_i%';
+
+ SELECT prod_name --show all product names that do not have r as the third letter from the products table
+ FROM Products
+ WHERE NOT prod_name LIKE '__r%';
+
+ SELECT cust_name, cust_contact --show the customer name and contact that have emails that end in .com from the customers table
+ FROM Customers
+ WHERE cust_email LIKE '%.com';
+
+ SELECT cust_name --show customer name that does not start with A or B from customers table
+ FROM Customers
+ WHERE cust_name LIKE '[^AB]%';
+
+ SELECT vend_name --show vendor names that end in s or d from vendors table
+ FROM Vendors
+ WHERE vend_name LIKE '%[SD]';
+
+ SELECT vend_address, vend_zip --show vendor addresses and zips that have states that start with O or N from vendors table
+ FROM Vendors
+ WHERE vend_state LIKE '[ON]%';
+
+ --calculated fields (create new column)
+
+ SELECT vend_name+'('+vend_country+')' --creates new column with the vendor's name, and also in parenthesis the vedor country (w/all empty space), and ordered in alphabetical order from vendor name
+ FROM Vendors
+ ORDER BY vend_name;
+
+ SELECT RTRIM(vend_name)+'('+RTRIM(vend_country)+')' --right trim, cleans up all spaces to the right on vendor name and vend_country 
+ FROM Vendors
+ ORDER BY vend_name;
+
+ SELECT RTRIM(vend_name)+'('+RTRIM(vend_country)+')' AS vend_title --same, but with a new column title
+ FROM Vendors
+ ORDER BY vend_name;
+
+ SELECT prod_id, quantity, item_price
+ FROM Orderitems
+ WHERE order_num=20008;
+
+ SELECT prod_id, quantity, item_price, quantity*item_price AS expanded_price --can create mathematical calculations with columns that are numerical
+ FROM OrderItems
+ WHERE order_num=20008;
+
+
+
+
+
+
+
+
